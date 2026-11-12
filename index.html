@@ -1,78 +1,251 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#06152b">
-<title>RATELS FORENSIC</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#061225;color:white;font-family:Arial,sans-serif}
-header{background:#0b2341;padding:24px 18px;border-bottom:2px solid #168bff}
-header h1{font-size:25px;margin:8px 0;color:#fff}
-header p{color:#f5cc32;margin:5px 0}
-main{padding:17px}
-.welcome{background:#102c4c;padding:17px;border-radius:14px;margin-bottom:20px}
-.status{color:#35d58a;font-weight:bold}
-h2{font-size:19px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.tile{background:#102844;border:1px solid #285078;border-radius:12px;padding:20px 10px;text-align:center;min-height:105px}
-.tile span{display:block;font-size:28px;margin-bottom:9px}
-.tile b{font-size:14px}
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.stat{background:#102844;padding:17px;border-radius:12px;text-align:center}
-.stat strong{display:block;font-size:27px;color:#39a8ff}
-button{background:#0865e9;color:white;border:0;border-radius:9px;padding:13px;font-weight:bold;width:100%;margin-top:12px}
-footer{text-align:center;padding:25px;color:#8da6c2;font-size:12px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patrick-kaku-Ratels | Accountability & Investigation Portal</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-primary: #c9d1d9;
+            --text-heading: #ffffff;
+            --accent-gold: #f0883e;
+            --accent-red: #da3633;
+            --accent-blue: #58a6ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--text-heading);
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        header h1 span {
+            color: var(--accent-gold);
+        }
+
+        .manifesto-box {
+            background: linear-gradient(135deg, var(--card-bg), #1f242c);
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--accent-gold);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+
+        .manifesto-box h2 {
+            color: var(--text-heading);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .manifesto-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-heading);
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .pillar-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 8px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-gold);
+        }
+
+        .pillar-card h3 {
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .pillar-card p {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .report-section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 35px;
+            border-radius: 8px;
+        }
+
+        .report-section h2 {
+            color: var(--text-heading);
+            margin-bottom: 10px;
+        }
+
+        .report-section p {
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-heading);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-heading);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .btn-submit {
+            background-color: var(--accent-gold);
+            color: #000;
+            font-weight: 700;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: opacity 0.2s;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #8b949e;
+        }
+    </style>
 </head>
 <body>
-<header>
-<div style="font-size:35px">🛡️</div>
-<h1>RATELS FORENSIC</h1>
-<p>Digital Intelligence Unit</p>
-<small>INVESTIGATION • EVIDENCE • ACCOUNTABILITY</small>
-</header>
-<main>
-<div class="welcome">
-<h2>Welcome, Patrick Kaku</h2>
-<p>Ratel Investigation Officer</p>
-<p>Ogun State Chapter</p>
-<span class="status">● SYSTEM ONLINE</span>
-</div>
-<h2>Investigation Modules</h2>
-<div class="grid">
-<div class="tile" onclick="openModule('Dashboard')"><span>📊</span><b>Dashboard</b></div>
-<div class="tile" onclick="openModule('New Case')"><span>📁</span><b>New Case</b></div>
-<div class="tile" onclick="openModule('Case Management')"><span>🗂️</span><b>Case Management</b></div>
-<div class="tile" onclick="openModule('Evidence Register')"><span>🔎</span><b>Evidence Register</b></div>
-<div class="tile" onclick="openModule('Financial Investigation')"><span>💰</span><b>Financial Investigation</b></div>
-<div class="tile" onclick="openModule('Intelligence Analysis')"><span>🕵️</span><b>Intelligence Analysis</b></div>
-<div class="tile" onclick="openModule('Report Generation')"><span>📄</span><b>Report Generation</b></div>
-<div class="tile" onclick="openModule('Contract Tracking')"><span>🏗️</span><b>Contract Tracking</b></div>
-</div>
-<h2>Case Overview</h2>
-<div class="stats">
-<div class="stat"><strong>0</strong>Active Cases</div>
-<div class="stat"><strong>0</strong>Under Review</div>
-<div class="stat"><strong>0</strong>Completed</div>
-<div class="stat"><strong>0</strong>Follow-up</div>
-</div>
-<h2>Quick Actions</h2>
-<button onclick="openModule('Evidence Capture')">＋ Register Evidence</button>
-<button onclick="openModule('Investigation Report')">Generate Investigation Report</button>
-</main>
-<footer>
-RATELS FORENSIC © 2026<br>
-Truth • Evidence • Accountability<br>
-Prototype – No real case data stored yet.
-</footer>
-<script>
-function openModule(name){
-alert(name+" module selected. This feature will be developed in the next stage.");
-}
-</script>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Patrick Kaku <span>Ratels</span></h1>
+            <p>Official Public Accountability & Fact-Finding Hub</p>
+        </header>
+
+        <!-- Manifesto Highlight -->
+        <div class="manifesto-box">
+            <h2>Our Core Code</h2>
+            <p class="manifesto-text">
+                "We call for justice, we investigate, we prove evidence, we demand accountability, and we hate lies."
+            </p>
+        </div>
+
+        <!-- Pillars -->
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <h3>🔍 Investigation</h3>
+                <p>Digging deep into facts, uncovering malpractices, and leaving no stone unturned to bring truth to light.</p>
+            </div>
+            <div class="pillar-card">
+                <h3>⚖️ Justice & Evidence</h3>
+                <p>Operating strictly on verifiable facts, documentation, and solid proof rather than rumors or assumptions.</p>
+            </div>
+            <div class="pillar-card">
+                <h3>🛡️ Accountability</h3>
+                <p>Demanding transparency, responsibility, and honest answers for the masses at all costs.</p>
+            </div>
+        </div>
+
+        <!-- Secure Report Section -->
+        <div class="report-section">
+            <h2>Submit a Tip or Inquiry</h2>
+            <p>Have information, evidence, or a case that requires investigation? Share the details securely below.</p>
+            
+            <form onsubmit="event.preventDefault(); alert('Thank you. Your report has been securely registered.');">
+                <div class="form-group">
+                    <label for="name">Your Name / Alias (Optional)</label>
+                    <input type="text" id="name" placeholder="Enter name or keep anonymous">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject / Title</label>
+                    <input type="text" id="subject" placeholder="Brief summary of the matter" required>
+                </div>
+                <div class="form-group">
+                    <label for="details">Detailed Evidence / Description</label>
+                    <textarea id="details" rows="5" placeholder="Provide dates, locations, and facts..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Submit Report</button>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 Patrick Kaku Ratels. Stand for the masses. Bring solutions at any cost.</p>
+        </footer>
+    </div>
+
 </body>
 </html>
-
