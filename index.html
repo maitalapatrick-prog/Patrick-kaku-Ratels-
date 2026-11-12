@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#06152b">
+<title>RATELS FORENSIC</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#061225;color:white;font-family:Arial,sans-serif}
+header{background:#0b2341;padding:24px 18px;border-bottom:2px solid #168bff}
+header h1{font-size:25px;margin:8px 0;color:#fff}
+header p{color:#f5cc32;margin:5px 0}
+main{padding:17px}
+.welcome{background:#102c4c;padding:17px;border-radius:14px;margin-bottom:20px}
+.status{color:#35d58a;font-weight:bold}
+h2{font-size:19px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.tile{background:#102844;border:1px solid #285078;border-radius:12px;padding:20px 10px;text-align:center;min-height:105px}
+.tile span{display:block;font-size:28px;margin-bottom:9px}
+.tile b{font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.stat{background:#102844;padding:17px;border-radius:12px;text-align:center}
+.stat strong{display:block;font-size:27px;color:#39a8ff}
+button{background:#0865e9;color:white;border:0;border-radius:9px;padding:13px;font-weight:bold;width:100%;margin-top:12px}
+footer{text-align:center;padding:25px;color:#8da6c2;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+<div style="font-size:35px">🛡️</div>
+<h1>RATELS FORENSIC</h1>
+<p>Digital Intelligence Unit</p>
+<small>INVESTIGATION • EVIDENCE • ACCOUNTABILITY</small>
+</header>
+<main>
+<div class="welcome">
+<h2>Welcome, Patrick Kaku</h2>
+<p>Ratel Investigation Officer</p>
+<p>Ogun State Chapter</p>
+<span class="status">● SYSTEM ONLINE</span>
+</div>
+<h2>Investigation Modules</h2>
+<div class="grid">
+<div class="tile" onclick="openModule('Dashboard')"><span>📊</span><b>Dashboard</b></div>
+<div class="tile" onclick="openModule('New Case')"><span>📁</span><b>New Case</b></div>
+<div class="tile" onclick="openModule('Case Management')"><span>🗂️</span><b>Case Management</b></div>
+<div class="tile" onclick="openModule('Evidence Register')"><span>🔎</span><b>Evidence Register</b></div>
+<div class="tile" onclick="openModule('Financial Investigation')"><span>💰</span><b>Financial Investigation</b></div>
+<div class="tile" onclick="openModule('Intelligence Analysis')"><span>🕵️</span><b>Intelligence Analysis</b></div>
+<div class="tile" onclick="openModule('Report Generation')"><span>📄</span><b>Report Generation</b></div>
+<div class="tile" onclick="openModule('Contract Tracking')"><span>🏗️</span><b>Contract Tracking</b></div>
+</div>
+<h2>Case Overview</h2>
+<div class="stats">
+<div class="stat"><strong>0</strong>Active Cases</div>
+<div class="stat"><strong>0</strong>Under Review</div>
+<div class="stat"><strong>0</strong>Completed</div>
+<div class="stat"><strong>0</strong>Follow-up</div>
+</div>
+<h2>Quick Actions</h2>
+<button onclick="openModule('Evidence Capture')">＋ Register Evidence</button>
+<button onclick="openModule('Investigation Report')">Generate Investigation Report</button>
+</main>
+<footer>
+RATELS FORENSIC © 2026<br>
+Truth • Evidence • Accountability<br>
+Prototype – No real case data stored yet.
+</footer>
+<script>
+function openModule(name){
+alert(name+" module selected. This feature will be developed in the next stage.");
+}
+</script>
+</body>
+</html>
+
