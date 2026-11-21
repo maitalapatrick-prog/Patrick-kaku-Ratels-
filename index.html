@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d1117">
+<title>RATELS FORENSIC</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0d1117;color:#c9d1d9;font:15px Arial}
+header{background:#161b22;padding:20px}
+h1{color:#f0b429;margin:0}
+header p{margin-bottom:0}
+main{max-width:900px;margin:auto;padding:14px}
+nav{display:flex;gap:7px;overflow-x:auto;margin-bottom:15px}
+button{padding:11px;border:1px solid #46515e;border-radius:8px;background:#263747;color:white;font-weight:bold}
+nav button.active{background:#f0b429;color:#111}
+section{display:none;background:#161b22;border:1px solid #30363d;border-radius:10px;padding:15px;margin-bottom:14px}
+section.active{display:block}
+h2{color:white}
+input,select,textarea{width:100%;padding:11px;margin:6px 0 12px;background:#0d1117;color:white;border:1px solid #46515e;border-radius:7px}
+textarea{min-height:75px}
+label{display:block;color:#c9d1d9}
+.stat{display:inline-block;background:#0d1117;padding:15px;margin:4px;border-radius:8px;min-width:42%}
+.stat b{display:block;color:#f0b429;font-size:25px}
+.record{background:#0d1117;border:1px solid #30363d;padding:12px;margin:10px 0;border-radius:8px;overflow-wrap:anywhere}
+.small{color:#8b949e;font-size:12px}
+.warning{background:#302819;color:#f5d98b;padding:12px;border-radius:8px;line-height:1.5}
+.primary{background:#245b83}
+.danger{background:#782d2d}
+@media(min-width:650px){.stat{min-width:20%}}
+</style>
+</head>
+<body>
+<header>
+<h1>RATELS FORENSIC</h1>
+<p>Investigation • Evidence • Justice • Accountability</p>
+</header>
+<main>
+<div class="warning">
+<b>LOCAL PROTOTYPE:</b> Records are stored only in this browser on this device. There is no secure server, encryption, investigator login or cloud backup. Do not enter confidential or sensitive information.
+</div>
+
+<nav>
+<button class="active" onclick="showTab('dashboard',this)">Dashboard</button>
+<button onclick="showTab('cases',this)">Cases</button>
+<button onclick="showTab('evidence',this)">Evidence</button>
+<button onclick="showTab('finance',this)">Finance</button>
+<button onclick="showTab('reports',this)">Reports</button>
+<button onclick="showTab('backup',this)">Backup</button>
+</nav>
+
+<section id="dashboard" class="active">
+<h2>Investigation Dashboard</h2>
+<div class="stat">Cases<b id="nc">0</b></div>
+<div class="stat">Evidence<b id="ne">0</b></div>
+<div class="stat">Financial leads<b id="nf">0</b></div>
+<h3>RATELS investigation principles</h3>
+<p>We investigate, preserve evidence, verify claims and demand accountability.</p>
+<p>Separate allegations from verified facts. Record sources and limitations. Give relevant persons or institutions a fair opportunity to respond.</p>
+</section>
+
+<section id="cases">
+<h2>Case Management</h2>
+<form id="caseForm">
+<label>Case title<input id="ct" required placeholder="Investigation title"></label>
+<label>Case reference<input id="cr" placeholder="RAT-001"></label>
+<label>Subject / institution<input id="cs" placeholder="Project or public institution"></label>
+<label>Investigation stage
+<select id="stage"><option>New lead</option><option>Under review</option><option>Evidence gathering</option><option>Awaiting response</option><option>Completed</option></select></label>
+<label>Investigation objective<textarea id="co" placeholder="What are we investigating?"></textarea></label>
+<label>Limitations / unanswered questions<textarea id="cl"></textarea></label>
+<button class="primary">SAVE CASE</button>
+</form>
+<div id="caseList"></div>
+</section>
+
+<section id="evidence">
+<h2>Evidence Register</h2>
+<form id="evidenceForm">
+<label>Description<input id="et" required placeholder="Document or evidence title"></label>
+<label>Related case reference<input id="ec" placeholder="RAT-001"></label>
+<label>Evidence type<select id="type"><option>Official document</option><option>Website / publication</option><option>Photograph / video</option><option>Interview note</option><option>Other</option></select></label>
+<label>Source / publisher<input id="es" placeholder="Where did it come from?"></label>
+<label>Date obtained<input id="ed" type="date"></label>
+<label>Assessment<select id="status"><option>Unreviewed</option><option>Unverified lead</option><option>Corroborated</option><option>Verified source document</option><option>Disputed</option></select></label>
+<label>Source link or file reference<input id="el" placeholder="URL or safe file reference"></label>
+<label>Notes / handling history<textarea id="en"></textarea></label>
+<button class="primary">SAVE EVIDENCE</button>
+</form>
+<div id="evidenceList"></div>
+</section>
+
+<section id="finance">
+<h2>Financial Investigation</h2>
+<form id="financeForm">
+<label>Project / expenditure title<input id="ft" required placeholder="Project name"></label>
+<label>Amount in Naira<input id="fa" type="number" min="0" placeholder="Documented amount"></label>
+<label>Year<input id="fy" type="number" placeholder="2026"></label>
+<label>Source of amount<input id="fs" placeholder="Budget, contract, payment record"></label>
+<label>Assessment<select id="fstatus"><option>Unverified lead</option><option>Source located</option><option>Cross-check required</option><option>Corroborated</option><option>Disputed</option></select></label>
+<label>Findings and questions<textarea id="fn"></textarea></label>
+<button class="primary">SAVE FINANCIAL LEAD</button>
+</form>
+<div id="financeList"></div>
+</section>
+
+<section id="reports">
+<h2>Report Generator</h2>
+<label>Select case<select id="reportCase"></select></label>
+<button class="primary" onclick="makeReport()">GENERATE REPORT</button>
+<button onclick="window.print()">PRINT / SAVE PDF</button>
+<div id="reportOutput" class="record">Select a case to prepare a report.</div>
+</section>
+
+<section id="backup">
+<h2>Backup and Restore</h2>
+<p>Export your records before changing devices or clearing browser data.</p>
+<button class="primary" onclick="exportData()">EXPORT BACKUP</button>
+<label>Import backup file<input type="file" id="importFile" accept=".json"></label>
+<button class="danger" onclick="clearData()">DELETE ALL LOCAL RECORDS</button>
+<p class="small">Exported files are not encrypted. Store them safely.</p>
+</section>
+
+<p class="small">RATELS FORENSIC • Local prototype • Verify before making public allegations.</p>
+</main>
+
+<script>
+let db={cases:[],evidence:[],finance:[]};
+const $=id=>document.getElementById(id);
+function load(){
+try{
+let x=JSON.parse(localStorage.getItem("ratels_data")||"null");
+if(x&&Array.isArray(x.cases)&&Array.isArray(x.evidence)&&Array.isArray(x.finance))db=x;
+}catch(e){}
+render();
+}
+function save(){
+try{localStorage.setItem("ratels_data",JSON.stringify(db));}
+catch(e){alert("Storage unavailable. Export your records if possible.");}
+render();
+}
+function safe(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function showTab(id,b){
+document.querySelectorAll("section").forEach(x=>x.classList.remove("active"));
+document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));
+$(id).classList.add("active");b.classList.add("active");
+}
+function card(title,details,notes){
+return `<div class="record"><b>${safe(title)}</b><p>${safe(details)}</p><p>${safe(notes)}</p></div>`;
+}
+function render(){
+$("nc").textContent=db.cases.length;
+$("ne").textContent=db.evidence.length;
+$("nf").textContent=db.finance.length;
+$("caseList").innerHTML=db.cases.map(x=>card(x.title,(x.ref||"No reference")+" • "+x.stage+" • "+x.subject,x.objective+" | Limitations: "+x.limits)).join("")||"No cases registered.";
+$("evidenceList").innerHTML=db.evidence.map(x=>card(x.title,(x.caseRef||"No case")+" • "+x.type+" • "+x.status+" • "+x.source,x.date+" | "+x.link+" | "+x.notes)).join("")||"No evidence registered.";
+$("financeList").innerHTML=db.finance.map(x=>card(x.title,"₦"+(x.amount||"Not recorded")+" • "+x.year+" • "+x.status+" • "+x.source,x.notes)).join("")||"No financial leads registered.";
+let old=$("reportCase").value;
+$("reportCase").innerHTML='<option value="">Choose a case</option>'+db.cases.map(x=>`<option value="${safe(x.id)}">${safe(x.ref||x.id)} — ${safe(x.title)}</option>`).join("");
+$("reportCase").value=old;
+}
+$("caseForm").onsubmit=e=>{
+e.preventDefault();
+db.cases.unshift({id:Date.now()+"",title:$("ct").value,ref:$("cr").value,subject:$("cs").value,stage:$("stage").value,objective:$("co").value,limits:$("cl").value});
+e.target.reset();save();alert("Case saved.");
+};
+$("evidenceForm").onsubmit=e=>{
+e.preventDefault();
+db.evidence.unshift({title:$("et").value,caseRef:$("ec").value,type:$("type").value,source:$("es").value,date:$("ed").value,status:$("status").value,link:$("el").value,notes:$("en").value});
+e.target.reset();save();alert("Evidence entry saved.");
+};
+$("financeForm").onsubmit=e=>{
+e.preventDefault();
+db.finance.unshift({title:$("ft").value,amount:$("fa").value,year:$("fy").value,source:$("fs").value,status:$("fstatus").value,notes:$("fn").value});
+e.target.reset();save();alert("Financial lead saved.");
+};
+function makeReport(){
+let c=db.cases.find(x=>x.id===$("reportCase").value);
+if(!c){alert("Select a case first.");return;}
+let ev=db.evidence.filter(x=>x.caseRef===c.ref);
+$("reportOutput").innerHTML="<h3>RATELS FORENSIC — Preliminary Report</h3>"+
+"<b>Case:</b> "+safe(c.title)+"<br><b>Reference:</b> "+safe(c.ref)+"<br><b>Stage:</b> "+safe(c.stage)+
+"<h3>Objective</h3>"+safe(c.objective)+"<h3>Limitations</h3>"+safe(c.limits)+
+"<h3>Linked evidence ("+ev.length+")</h3>"+ev.map(x=>"<p>"+safe(x.title)+" — "+safe(x.status)+" — "+safe(x.source)+"</p>").join("")+
+"<h3>Right of reply</h3>Record who was contacted, when, and their response."+
+"<h3>Conclusion</h3>Investigator must assess all evidence and contrary material. No legal finding is made by this report."+
+"<p>Generated: "+new Date().toLocaleString()+"</p>";
+}
+function exportData(){
+let a=document.createElement("a");
+let blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"});
+a.href=URL.createObjectURL(blob);a.download="ratels-backup.json";a.click();
+URL.revokeObjectURL(a.href);
+}
+$("importFile").onchange=async e=>{
+try{
+let x=JSON.parse(await e.target.files[0].text());
+if(!Array.isArray(x.cases)||!Array.isArray(x.evidence)||!Array.isArray(x.finance))throw Error();
+if(confirm("Replace current records with this backup?")){db=x;save();alert("Backup imported.");}
+}catch(err){alert("Invalid backup file.");}
+e.target.value="";
+};
+function clearData(){
+if(confirm("Delete all local records? Export a backup first.")){db={cases:[],evidence:[],finance:[]};save();}
+}
+load();
+</script>
+</body>
+</html>
